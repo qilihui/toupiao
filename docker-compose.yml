@@ -11,6 +11,9 @@ services:
       - TZ=Asia/Shanghai
       - ID=4080
       - RID=76
+      - MYSQL_DATABASE=toupiao
+      - MYSQL_USER=toupiao
+      - MYSQL_PASSWORD=toupiao
     volumes:
       - ./data/logs:/work/logs
     entrypoint: ["java","-Dspring.profiles.active=aliyun","-jar","/work/target/demo-0.0.1-SNAPSHOT.jar"]
