@@ -14,6 +14,8 @@ services:
       - MYSQL_DATABASE=toupiao
       - MYSQL_USER=toupiao
       - MYSQL_PASSWORD=toupiao
+      - MINTIME=10000
+      - MAXTIME=60000
     volumes:
       - ./data/logs:/work/logs
     entrypoint: ["java","-Dspring.profiles.active=aliyun","-jar","/work/target/demo-0.0.1-SNAPSHOT.jar"]

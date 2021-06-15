@@ -35,6 +35,11 @@ public class ToupiaoService {
     private int voteId;
     @Value("${conf.rid}")
     private int voteRid;
+    @Value("${conf.minTime}")
+    private int minTime;
+    @Value("${conf.maxTime}")
+    private int maxTime;
+
     private static final String url = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=vote&m=tyzm_diamondvote&userss=&openid=%s";
     private static final String openIdUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=viewc&m=tyzm_diamondvote&userss=";
     private static final String ridUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=1&isopenlink=first&do=indexx&m=tyzm_diamondvote&userss=";
@@ -42,7 +47,7 @@ public class ToupiaoService {
     private static final String playerInfoUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=view&m=tyzm_diamondvote&userss=";
 
     @PostConstruct
-    public void init(){
+    public void init() {
         this.toupiao();
     }
 
@@ -173,12 +178,12 @@ public class ToupiaoService {
         Collections.shuffle(openIds);
         for (OpenId openId : openIds) {
             String body = null;
-            int time = RandomUtil.randomInt(6000, 20000);
+            int time = RandomUtil.randomInt(minTime, maxTime);
             try {
                 User user = getCurrentTicket(voteRid, voteId);
                 log.info("姓名: {}, 票数: {} ", user.getName(), user.getNum());
                 body = vote(voteRid, voteId, openId.getOpenId());
-                log.info("随机时间:{}, 投票成功：id: {}, openId: {}, msg: {}", time, openId.getId(), openId, body);
+                log.info("随机时间:{}秒, 投票成功：id: {}, openId: {}, msg: {}", time / 1000, openId.getId(), openId, body);
                 if (body.contains("锁定")) {
                     log.info("用户被锁定: 共刷 {} 票", user.getNum() - start.getNum());
                     log.info("\n共耗时 {} 分钟 {} 秒", (System.currentTimeMillis() - startTime) / 60000, (System.currentTimeMillis() - startTime) % 60000 / 1000);

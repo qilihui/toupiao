@@ -25,3 +25,5 @@ logging:
 conf:
   rid: 76
   id: 4080
+  minTime: 10000
+  maxTime: 60000

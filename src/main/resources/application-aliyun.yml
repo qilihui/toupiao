@@ -25,3 +25,5 @@ logging:
 conf:
   rid: ${RID}
   id: ${ID}
+  minTime: ${MINTIME}
+  maxTime: ${MAXTIME}
