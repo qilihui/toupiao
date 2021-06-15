@@ -9,8 +9,8 @@ services:
       - toupiao-mysql
     environment:
       - TZ=Asia/Shanghai
-      - ID=76
-      - RID=4080
+      - ID=4080
+      - RID=76
     volumes:
       - ../data/logs:/work/logs
     entrypoint: ["java","-Dspring.profiles.active=aliyun","-jar","/work/target/demo-0.0.1-SNAPSHOT.jar"]
