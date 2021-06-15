@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用 layui</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/css/layui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/layui/2.6.8/layui.min.js"></script>
+</head>
+<body>
+<form class="layui-form" action="#">
+    <div class="layui-form-item">
+        <label class="layui-form-label">rid</label>
+        <div class="layui-input-block">
+            <input type="number" name="rid" required lay-verify="required" placeholder="活动id" autocomplete="off"
+                   class="layui-input" id="rid">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">id</label>
+        <div class="layui-input-block">
+            <input type="number" name="id" required lay-verify="required" placeholder="参赛者id" autocomplete="off"
+                   class="layui-input" id="id">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+    </div>
+</form>
+
+<table class="layui-table">
+    <colgroup>
+        <col width="150">
+        <col width="200">
+        <col>
+    </colgroup>
+    <thead>
+    <tr>
+        <th>姓名</th>
+        <th>票数</th>
+        <th>时间</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td id="username"></td>
+        <td id="userticket"></td>
+        <td id="userretime"></td>
+    </tr>
+    </tbody>
+</table>
+
+<script>
+    //Demo
+    layui.use(['layer', 'form', 'jquery'], function () {
+        var layer = layui.layer
+            , form = layui.form
+            , $ = layui.jquery;
+
+        init()
+
+        function init() {
+            let rid = localStorage.getItem('rid');
+            let id = localStorage.getItem("id");
+            if (rid != null) {
+                $("#rid").attr("value", rid);
+                $("#id").attr("value", id);
+            }
+        }
+
+        //监听提交
+        form.on('submit(formDemo)', function (data) {
+            // layer.msg(JSON.stringify(data.field));
+            localStorage.setItem("rid", data.field.rid)
+            localStorage.setItem("id", data.field.id)
+            getInfo(data.field.rid, data.field.id)
+            // setInterval(function(){
+            //     let rid = localStorage.getItem('rid');
+            //     let id = localStorage.getItem("id");
+            //     if (rid != null && id != null) {
+            //         getInfo(rid, id);
+            //     }
+            // }, 5000);
+            return false;
+        });
+
+        function getInfo(rid, id) {
+            $.ajax({
+                type: "post",
+                url: "/getInfo",
+                data: {
+                    rid: rid,
+                    id: id
+                },
+                success: function (res) {
+                    if (res.code === 200) {
+                        $('#username').text(res.data.name)
+                        $('#userticket').text(res.data.num)
+                        $('#userretime').text(new Date().toTimeString())
+                    } else {
+                        layer.msg("请求失败");
+                    }
+                },
+                error: function () {
+                    layer.msg("请求失败");
+                }
+            });
+        }
+    });
+
+
+</script>
+</body>
+</html>

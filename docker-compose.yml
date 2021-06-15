@@ -1,0 +1,30 @@
+version: '3'
+services:
+  drawingbed-server:
+    container_name: toupiao-server
+    build: .
+    working_dir: /work
+    restart: always
+    depends_on:
+      - toupiao-mysql
+    environment:
+      - TZ=Asia/Shanghai
+      - ID=76
+      - RID=4080
+    volumes:
+      - ../data/logs:/work/logs
+    entrypoint: ["java","-Dspring.profiles.active=aliyun","-jar","/work/target/demo-0.0.1-SNAPSHOT.jar"]
+
+  toupiao-mysql:
+    container_name: toupiao-mysql
+    image: mysql:5.7.33
+    restart: always
+    ports:
+      - 3366:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=this_is_mysql_in_aliyun_docker
+      - MYSQL_DATABASE=toupiao
+      - MYSQL_USER=toupiao
+      - MYSQL_PASSWORD=toupiao
+    volumes:
+      - ./data/mysql:/var/lib/mysql
