@@ -4,7 +4,7 @@ services:
     container_name: toupiao-server
     build: .
     working_dir: /work
-    restart: always
+#    restart: always
     depends_on:
       - toupiao-mysql
     environment:
@@ -16,6 +16,12 @@ services:
       - MYSQL_PASSWORD=toupiao
       - MINTIME=10000
       - MAXTIME=60000
+      - url=https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=vote&m=tyzm_diamondvote&userss=&openid=%s
+      - openIdUrl=https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=viewc&m=tyzm_diamondvote&userss=
+      - ridUrl=https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=1&isopenlink=first&do=indexx&m=tyzm_diamondvote&userss=
+      - playerUrl=https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=%d&isopenlink=first&do=index&m=tyzm_diamondvote&userss=
+      - playerInfoUrl=https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=view&m=tyzm_diamondvote&userss=
+
     volumes:
       - ./data/logs:/work/logs
     entrypoint: ["java","-Dspring.profiles.active=aliyun","-jar","/work/target/demo-0.0.1-SNAPSHOT.jar"]
@@ -23,7 +29,7 @@ services:
   toupiao-mysql:
     container_name: toupiao-mysql
     image: mysql:5.7.33
-    restart: always
+#    restart: always
     ports:
       - 3366:3306
     environment:

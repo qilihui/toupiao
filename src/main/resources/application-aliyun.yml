@@ -27,3 +27,8 @@ conf:
   id: ${ID}
   minTime: ${MINTIME}
   maxTime: ${MAXTIME}
+  url: ${url}
+  openIdUrl: ${openIdUrl}
+  ridUrl: ${ridUrl}
+  playerUrl: ${playerUrl}
+  playerInfoUrl: ${playerInfoUrl}

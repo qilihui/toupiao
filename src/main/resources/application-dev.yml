@@ -27,3 +27,8 @@ conf:
   id: 4080
   minTime: 10000
   maxTime: 60000
+  url: "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=vote&m=tyzm_diamondvote&userss=&openid=%s"
+  openIdUrl: "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=viewc&m=tyzm_diamondvote&userss="
+  ridUrl: "https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=1&isopenlink=first&do=indexx&m=tyzm_diamondvote&userss="
+  playerUrl: "https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=%d&isopenlink=first&do=index&m=tyzm_diamondvote&userss="
+  playerInfoUrl: "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=view&m=tyzm_diamondvote&userss="

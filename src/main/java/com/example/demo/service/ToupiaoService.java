@@ -40,11 +40,16 @@ public class ToupiaoService {
     @Value("${conf.maxTime}")
     private int maxTime;
 
-    private static final String url = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=vote&m=tyzm_diamondvote&userss=&openid=%s";
-    private static final String openIdUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=viewc&m=tyzm_diamondvote&userss=";
-    private static final String ridUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=1&isopenlink=first&do=indexx&m=tyzm_diamondvote&userss=";
-    private static final String playerUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&rid=%d&isopenlink=first&do=index&m=tyzm_diamondvote&userss=";
-    private static final String playerInfoUrl = "https://4.hbcm666.cn//app/index.php?i=1&c=entry&id=%d&rid=%d&isopenlink=first&do=view&m=tyzm_diamondvote&userss=";
+    @Value("${conf.url}")
+    private String url;
+    @Value("${conf.openIdUrl}")
+    private String openIdUrl;
+    @Value("${conf.ridUrl}")
+    private String ridUrl;
+    @Value("${conf.playerUrl}")
+    private String playerUrl;
+    @Value("${conf.playerInfoUrl}")
+    private String playerInfoUrl;
 
     @PostConstruct
     public void init() {
